@@ -7,7 +7,7 @@ import { Heart, ShoppingBag, User, Search } from 'lucide-react';
 
 export function Header() {
   return (
-    <header className="w-full h-[88px] px-12 bg-header text-white flex items-center justify-between">
+    <header className="w-full h-[88px] px-12 bg-header text-white flex items-center justify-between sticky top-0 z-50">
       <div className="flex items-center gap-9">
         <Link href="/" className="flex items-center gap-3 font-bold uppercase tracking-tight">
           <Image src="/logo.png" alt="Logo" width={40} height={40} />
