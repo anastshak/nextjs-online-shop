@@ -29,12 +29,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen overflow-hidden`}
+      >
         <Header />
 
         <SidebarProvider className="min-h-[calc(100vh-88px)]">
           <CategoriesSidebar />
-          <main>
+          <main className="flex-1 overflow-y-auto">
             <SidebarTrigger />
             {children}
           </main>
