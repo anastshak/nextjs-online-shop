@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { getCategories } from '@/lib/api/categories';
+import type { Category } from '@/lib/types';
 
 export default async function CategoriesSidebar() {
   const categories = await getCategories();
@@ -21,10 +22,10 @@ export default async function CategoriesSidebar() {
           <SidebarGroupLabel className="mb-2.5">Categories</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {categories.map((category: string) => (
-                <SidebarMenuItem key={category} className="capitalize">
+              {categories.map(({ slug, name }: Category) => (
+                <SidebarMenuItem key={slug} className="capitalize">
                   <SidebarMenuButton asChild>
-                    <Link href={`/products/${category}`}>{category.replace(/-/g, ' ')}</Link>
+                    <Link href={`/products/${slug}`}>{name}</Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
