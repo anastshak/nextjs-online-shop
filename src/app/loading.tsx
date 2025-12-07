@@ -1,5 +1,9 @@
 import { Spinner } from '@/components/ui/spinner';
 
 export default function Loading() {
-  return <Spinner className="size-10 text-green-600" />;
+  return (
+    <div className="flex flex-col gap-2 h-full items-center justify-center">
+      <Spinner className="size-10 text-loader" />
+    </div>
+  );
 }

@@ -69,6 +69,7 @@ main {
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-header: var(--header);
+  --color-loader: var(--loader);
 }
 
 :root {
@@ -105,6 +106,7 @@ main {
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --header: oklch(65% 0.17276 19.457);
+  --loader: oklch(65% 0.17276 19.457);
 }
 
 .dark {
