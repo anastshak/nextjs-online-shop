@@ -1,4 +1,5 @@
 import MiniPagination from '@/components/MiniPagination';
+import NoDataFound from '@/components/NoData';
 import ProductsGrid from '@/components/ProductsGrid';
 
 import { getAllProducts, searchProducts } from '@/lib/api/products';
@@ -27,6 +28,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   } else {
     data = await getAllProducts({ limit: PAGE_SIZE, skip });
     totalPages = Math.ceil(data.total / PAGE_SIZE);
+  }
+
+  if (!data?.products?.length) {
+    return <NoDataFound />;
   }
 
   return (

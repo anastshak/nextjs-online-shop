@@ -1,3 +1,4 @@
+import NoDataFound from '@/components/NoData';
 import ProductsGrid from '@/components/ProductsGrid';
 
 import { getProductsByCategory } from '@/lib/api/products';
@@ -14,7 +15,7 @@ export default async function ProductsByCategoryPage({ params }: Props) {
   const categoryName = category;
 
   if (!data?.products?.length) {
-    return <div className="flex items-center justify-center m-[25%]">No products found</div>;
+    return <NoDataFound />;
   }
 
   return (
