@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {
   Sidebar,
   SidebarContent,
@@ -8,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarGroupContent,
 } from '@/components/ui/sidebar';
-import Link from 'next/link';
+
 import { getCategories } from '@/lib/api/categories';
 import type { Category } from '@/lib/types';
 

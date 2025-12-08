@@ -2,10 +2,12 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Input } from '@/components/ui/input';
+
 import { Heart, ShoppingBag, User, Search } from 'lucide-react';
 
-export function Header() {
+import { Input } from '@/components/ui/input';
+
+export default function Header() {
   return (
     <header className="w-full h-[88px] px-12 bg-header text-white flex items-center justify-between sticky top-0 z-50">
       <div className="flex items-center gap-9">
