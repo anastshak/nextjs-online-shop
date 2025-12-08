@@ -13,3 +13,10 @@ export interface Product {
   discountPercentage: number;
   category: string;
 }
+
+export interface ProductsRequestResponse {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+}
