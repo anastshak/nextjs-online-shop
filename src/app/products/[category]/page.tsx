@@ -1,6 +1,6 @@
-import ProductCard from '@/components/ProductCard';
+import ProductsGrid from '@/components/ProductsGrid';
+
 import { getProductsByCategory } from '@/lib/api/products';
-import type { Product } from '@/lib/types';
 
 interface Props {
   params: {
@@ -19,13 +19,11 @@ export default async function ProductsByCategoryPage({ params }: Props) {
 
   return (
     <div className="px-6 h-[calc(100vh-116px)]">
-      <h1 className="mb-6 text-2xl font-semibold capitalize">{categoryName}</h1>
+      <h1 className="mb-6 text-2xl font-semibold capitalize">
+        {categoryName.replace(/-/g, ' ')}: {data.products.length}
+      </h1>
 
-      <div className="grid grid-cols-4 gap-6 pb-10">
-        {data.products.map((product: Product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
-      </div>
+      <ProductsGrid products={data.products} />
     </div>
   );
 }
