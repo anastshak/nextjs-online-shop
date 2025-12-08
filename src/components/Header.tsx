@@ -1,11 +1,12 @@
 'use client';
 
+import { Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { Heart, ShoppingBag, User, Search } from 'lucide-react';
+import { Heart, ShoppingBag, User } from 'lucide-react';
 
-import { Input } from '@/components/ui/input';
+import SearchBar from './SearchBar';
 
 export default function Header() {
   return (
@@ -18,13 +19,9 @@ export default function Header() {
           </span>
         </Link>
 
-        <div className="relative w-60">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/80" />
-          <Input
-            placeholder="Search..."
-            className="rounded-3xl bg-white/30 pl-10 text-white placeholder:text-white/70 border-white/30 focus-visible:ring-white/70"
-          />
-        </div>
+        <Suspense>
+          <SearchBar />
+        </Suspense>
       </div>
 
       {/* later add LOGIN/SIGNUP button for unauthorized user */}

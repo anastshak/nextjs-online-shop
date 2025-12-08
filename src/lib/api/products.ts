@@ -26,3 +26,15 @@ export async function getProductsByCategory(category: string) {
 
   return res.json();
 }
+
+export async function searchProducts(searchQuery: string): Promise<ProductsRequestResponse> {
+  const res = await fetch(`${BASE_API}/products/search?q=${searchQuery}`, {
+    next: { revalidate: 60 },
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to search products');
+  }
+
+  return res.json();
+}
