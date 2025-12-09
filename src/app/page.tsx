@@ -1,5 +1,5 @@
 import MiniPagination from '@/components/MiniPagination';
-import NoDataFound from '@/components/NoData';
+import NoDataFound from '@/components/common/NoData';
 import ProductsGrid from '@/components/ProductsGrid';
 
 import { getAllProducts, searchProducts } from '@/lib/api/products';

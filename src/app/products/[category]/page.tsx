@@ -1,4 +1,4 @@
-import NoDataFound from '@/components/NoData';
+import NoDataFound from '@/components/common/NoData';
 import ProductsGrid from '@/components/ProductsGrid';
 
 import { getProductsByCategory } from '@/lib/api/products';

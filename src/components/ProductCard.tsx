@@ -12,8 +12,8 @@ import { Button } from '@/components/ui/button';
 
 import type { Product } from '@/lib/types';
 
-import ActionIconButton from './ActionButton';
-import RatingStars from './RatingStars';
+import ActionIconButton from './common/ActionButton';
+import RatingStars from './common/RatingStars';
 
 interface ProductCardProps {
   product: Product;
