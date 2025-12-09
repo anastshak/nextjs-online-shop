@@ -3,14 +3,8 @@ import ProductsGrid from '@/components/ProductsGrid';
 
 import { getProductsByCategory } from '@/lib/api/products';
 
-interface Props {
-  params: {
-    category: string;
-  };
-}
-
-export default async function ProductsByCategoryPage({ params }: Props) {
-  const { category } = await params;
+export default async function ProductsByCategoryPage(props: PageProps<'/products/[category]'>) {
+  const { category } = await props.params;
   const data = await getProductsByCategory(category);
   const categoryName = category;
 
