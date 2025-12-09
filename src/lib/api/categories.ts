@@ -1,4 +1,4 @@
-import type { Category } from '../types';
+import type { Category } from '@/types';
 import { BASE_API } from './config';
 
 export async function getCategories(): Promise<Category[]> {

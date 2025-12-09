@@ -10,7 +10,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
-import type { Product } from '@/lib/types';
+import type { Product } from '@/types';
 
 import ActionIconButton from './common/ActionButton';
 import RatingStars from './common/RatingStars';

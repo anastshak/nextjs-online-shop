@@ -1,4 +1,4 @@
-import type { ProductsRequestResponse } from '../types';
+import type { ProductsRequestResponse } from '@/types';
 import { BASE_API } from './config';
 
 export async function getAllProducts({ limit = 12, skip = 0 }): Promise<ProductsRequestResponse> {
