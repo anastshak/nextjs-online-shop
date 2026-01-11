@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Heart, ShoppingBag } from 'lucide-react';
+import { Heart, HeartMinus, ShoppingBag, Trash2 } from 'lucide-react';
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 
 import type { Product } from '@/types';
 
-import ActionIconButton from './common/ActionButton';
+import ActionButton from './common/ActionButton';
 import RatingStars from './common/RatingStars';
 
 interface ProductCardProps {
@@ -51,21 +51,25 @@ export default function ProductCard({ product, showActions = true }: ProductCard
         <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black/20">
           {showActions && (
             <>
-              <ActionIconButton
-                onClick={() => setIsFavorite((v) => !v)}
+              <ActionButton
+                size="icon"
                 active={isFavorite}
                 activeClassName="text-red-500 fill-red-500"
+                className="rounded-full bg-white/90 hover:bg-white"
+                onClick={() => setIsFavorite((v) => !v)}
               >
-                <Heart className="h-4 w-4" />
-              </ActionIconButton>
+                {isFavorite ? <HeartMinus className="h-4 w-4" /> : <Heart className="h-4 w-4" />}
+              </ActionButton>
 
-              <ActionIconButton
+              <ActionButton
+                size="icon"
                 active={isInCart}
-                onClick={() => setIsInCart((v) => !v)}
                 activeClassName="text-green-600"
+                className="rounded-full bg-white/90 hover:bg-white"
+                onClick={() => setIsInCart((v) => !v)}
               >
-                <ShoppingBag className="h-4 w-4" />
-              </ActionIconButton>
+                {isInCart ? <Trash2 className="h-4 w-4" /> : <ShoppingBag className="h-4 w-4" />}
+              </ActionButton>
             </>
           )}
         </div>
@@ -89,13 +93,15 @@ export default function ProductCard({ product, showActions = true }: ProductCard
             <RatingStars rating={rating} />
           </div>
 
-          <ActionIconButton
+          <ActionButton
+            size="icon"
             active={isInCart}
-            onClick={() => setIsInCart((v) => !v)}
             activeClassName="text-green-600"
+            className="rounded-full bg-white/90 hover:bg-white"
+            onClick={() => setIsInCart((v) => !v)}
           >
-            <ShoppingBag className="h-4 w-4" />
-          </ActionIconButton>
+            {isInCart ? <Trash2 className="h-4 w-4" /> : <ShoppingBag className="h-4 w-4" />}
+          </ActionButton>
         </div>
       </CardContent>
 

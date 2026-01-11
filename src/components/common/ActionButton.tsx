@@ -1,30 +1,31 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
-interface ActionIconButtonProps {
-  onClick: () => void;
+type ButtonBaseProps = ComponentPropsWithoutRef<typeof Button>;
+
+interface ActionButtonProps extends ButtonBaseProps {
   active?: boolean;
   activeClassName?: string;
-  children: ReactNode;
 }
 
-export default function ActionIconButton({
-  onClick,
-  active,
-  activeClassName = '',
+export default function ActionButton({
+  active = false,
+  activeClassName,
+  className,
   children,
-}: ActionIconButtonProps) {
+  ...props
+}: ActionButtonProps) {
   return (
     <Button
-      size="icon"
-      variant="secondary"
-      className="rounded-full bg-white/90 hover:bg-white cursor-pointer"
-      onClick={onClick}
+      {...props}
+      variant={active ? 'secondary' : 'outline'}
+      className={cn(className, active && activeClassName, 'cursor-pointer')}
     >
-      <span className={active ? activeClassName : ''}>{children}</span>
+      {children}
     </Button>
   );
 }
