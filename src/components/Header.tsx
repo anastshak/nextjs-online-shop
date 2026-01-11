@@ -19,7 +19,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <Suspense fallback={<p>Loading..</p>}>
+        <Suspense fallback={<p>Loading...</p>}>
           <SearchBar />
         </Suspense>
       </div>
