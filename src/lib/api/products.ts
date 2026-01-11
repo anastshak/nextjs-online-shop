@@ -1,4 +1,4 @@
-import type { ProductsRequestResponse } from '@/types';
+import type { Product, ProductsRequestResponse } from '@/types';
 import { BASE_API } from './config';
 
 export async function getAllProducts({ limit = 12, skip = 0 }): Promise<ProductsRequestResponse> {
@@ -34,6 +34,18 @@ export async function searchProducts(searchQuery: string): Promise<ProductsReque
 
   if (!res.ok) {
     throw new Error('Failed to search products');
+  }
+
+  return res.json();
+}
+
+export async function getProduct(id: string): Promise<Product> {
+  const res = await fetch(`${BASE_API}/products/${id}`, {
+    next: { revalidate: 300 },
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch product');
   }
 
   return res.json();
