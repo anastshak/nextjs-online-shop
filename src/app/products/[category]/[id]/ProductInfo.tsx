@@ -6,11 +6,11 @@ import RatingStars from '@/components/common/RatingStars';
 
 import ProductActions from './ProductActions';
 
-interface Props {
+interface ProductInfoProps {
   product: Product;
 }
 
-export default function ProductInfo({ product }: Props) {
+export default function ProductInfo({ product }: ProductInfoProps) {
   const { title, description, price, discountPercentage, rating, stock, brand } = product;
 
   const hasDiscount = discountPercentage > 0;
