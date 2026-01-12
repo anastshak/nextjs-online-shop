@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 
-import { BLUR_DATA_URL } from '@/lib/blur';
+import { BLUR_DATA_URL } from '@/lib/helpers/blur';
 
 interface ProductGalleryProps {
   images: string[];

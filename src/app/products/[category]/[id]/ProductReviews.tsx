@@ -1,5 +1,5 @@
 import RatingStars from '@/components/common/RatingStars';
-import formatDate from '@/lib/formatDate';
+import formatDate from '@/lib/helpers/formatDate';
 import type { Product } from '@/types';
 
 export default function ProductReviews({ reviews }: { reviews: Product['reviews'] }) {
