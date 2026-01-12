@@ -1,4 +1,4 @@
-import type { Product } from '@/types';
+import type { Product } from '@/types/product';
 
 import { Badge } from '@/components/ui/badge';
 import ProductInfoString from '@/components/common/ProductInfoString';

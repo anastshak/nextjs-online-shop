@@ -1,6 +1,6 @@
 import ProductCard from '@/components/ProductCard';
 
-import type { Product } from '@/types';
+import type { Product } from '@/types/product';
 
 interface Props {
   products: Product[];
