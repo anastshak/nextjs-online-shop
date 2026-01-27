@@ -2,8 +2,11 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+
 import CategoriesSidebar from '@/components/CategoriesSidebar';
 import Header from '@/components/Header';
+
+import { AuthProvider } from '@/lib/providers/AuthProvider';
 
 import './globals.css';
 
@@ -28,19 +31,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen overflow-hidden`}
       >
-        <Header />
+        <AuthProvider>
+          <Header />
 
-        <SidebarProvider className="min-h-[calc(100vh-88px)]">
-          <CategoriesSidebar />
-          <main className="flex-1 overflow-y-auto">
-            <SidebarTrigger />
-            {children}
-          </main>
-        </SidebarProvider>
+          <SidebarProvider className="min-h-[calc(100vh-88px)]">
+            <CategoriesSidebar />
+            <main className="flex-1 overflow-y-auto">
+              <SidebarTrigger />
+              {children}
+            </main>
+          </SidebarProvider>
+        </AuthProvider>
       </body>
     </html>
   );
