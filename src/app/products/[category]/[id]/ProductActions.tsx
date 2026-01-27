@@ -6,17 +6,17 @@ import { Heart, HeartMinus, ShoppingBag, Trash2 } from 'lucide-react';
 
 import ActionButton from '@/components/common/ActionButton';
 
-interface ProductActionProps {
-  showActions?: boolean;
-}
+import { useAuthStore } from '@/lib/stores/auth.store';
 
-export default function ProductActions({ showActions = true }: ProductActionProps) {
+export default function ProductActions() {
+  const { isAuthenticated } = useAuthStore();
+
   const [isFavorite, setIsFavorite] = useState(false);
   const [isInCart, setIsInCart] = useState(false);
 
   return (
     <>
-      {showActions && (
+      {isAuthenticated && (
         <div className="flex gap-3 pt-4">
           <ActionButton
             active={isFavorite}
