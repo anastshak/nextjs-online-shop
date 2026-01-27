@@ -24,7 +24,7 @@ export default function ActionButton({
     <Button
       {...props}
       variant={active ? 'secondary' : 'outline'}
-      className={cn(className, active && activeClassName, 'cursor-pointer')}
+      className={cn(className, active && activeClassName)}
     >
       {children}
     </Button>
