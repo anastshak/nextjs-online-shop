@@ -2,7 +2,8 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export async function POST() {
-  const refreshToken = (await cookies()).get('refreshToken')?.value;
+  const cookieStore = await cookies();
+  const refreshToken = cookieStore.get('refreshToken')?.value;
 
   if (!refreshToken) {
     return NextResponse.json({}, { status: 401 });
@@ -11,7 +12,6 @@ export async function POST() {
   const res = await fetch('https://dummyjson.com/auth/refresh', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
     body: JSON.stringify({ refreshToken }),
   });
 

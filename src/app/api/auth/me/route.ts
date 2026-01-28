@@ -2,7 +2,8 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const accessToken = (await cookies()).get('accessToken')?.value;
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
 
   if (!accessToken) {
     return NextResponse.json({ user: null }, { status: 401 });
@@ -12,7 +13,6 @@ export async function GET() {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
-    credentials: 'include',
   });
 
   if (!res.ok) {
@@ -20,6 +20,5 @@ export async function GET() {
   }
 
   const user = await res.json();
-
   return NextResponse.json({ user });
 }

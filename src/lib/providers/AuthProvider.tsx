@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 
+import { fetchWithAuth } from '../api/fetchWithAuth';
 import { useAuthStore } from '../stores/auth.store';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -10,7 +11,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     async function init() {
       try {
-        const response = await fetch('/api/auth/me');
+        const response = await fetchWithAuth('/api/auth/me');
 
         if (!response.ok) {
           logout();
