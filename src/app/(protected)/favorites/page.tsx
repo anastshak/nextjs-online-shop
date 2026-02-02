@@ -62,7 +62,7 @@ export default function FavoritesPage() {
   }
 
   return (
-    <div className="p-6 h-[calc(100vh-116px)]">
+    <>
       <div className="flex items-center justify-between mb-5">
         <h1 className="text-xl font-semibold">Favorites</h1>
 
@@ -72,6 +72,6 @@ export default function FavoritesPage() {
       </div>
 
       <ProductsGrid products={products} />
-    </div>
+    </>
   );
 }

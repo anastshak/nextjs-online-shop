@@ -13,12 +13,12 @@ export default async function ProductsByCategoryPage(props: PageProps<'/products
   }
 
   return (
-    <div className="px-6 h-[calc(100vh-116px)]">
+    <>
       <h1 className="mb-6 text-2xl font-semibold capitalize">
         {categoryName.replace(/-/g, ' ')}: {data.products.length}
       </h1>
 
       <ProductsGrid products={data.products} />
-    </div>
+    </>
   );
 }

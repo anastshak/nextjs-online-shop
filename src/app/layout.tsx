@@ -42,7 +42,7 @@ export default function RootLayout({
             <CategoriesSidebar />
             <main className="flex-1 overflow-y-auto">
               <SidebarTrigger />
-              {children}
+              <section className="px-6 h-[calc(100vh-116px)]">{children}</section>
             </main>
           </SidebarProvider>
         </AuthProvider>

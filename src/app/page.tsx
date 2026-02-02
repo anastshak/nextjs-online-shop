@@ -35,8 +35,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   }
 
   return (
-    <section className="px-6 h-[calc(100vh-116px)]">
-      {/* позже добавить какой-то заголовок/описание + сортировки */}
+    <>
       <h1 className="mb-6 text-2xl font-semibold">
         {query ? `Search: "${query}"` : 'All products'}
       </h1>
@@ -44,6 +43,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       <ProductsGrid products={data.products} />
 
       {!query && <MiniPagination currentPage={currentPage} totalPages={totalPages} />}
-    </section>
+    </>
   );
 }
