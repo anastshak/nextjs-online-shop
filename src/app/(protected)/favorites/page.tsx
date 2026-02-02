@@ -64,7 +64,7 @@ export default function FavoritesPage() {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between">
         <Title text="Favorites" />
 
         <ActionButton onClick={clearFavorites} active activeClassName="text-red-600 border-red-200">
