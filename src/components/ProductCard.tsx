@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 import { useAuthStore } from '@/lib/stores/auth.store';
+import { useFavoritesStore } from '@/lib/stores/favorites.store';
 
 import type { Product } from '@/types/product';
 
@@ -26,7 +27,9 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const { id, title, price, thumbnail, rating, discountPercentage, category } = product;
 
-  const [isFavorite, setIsFavorite] = useState(false);
+  const isFavorite = useFavoritesStore((s) => s.isFavorite(id));
+  const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite);
+
   const [isInCart, setIsInCart] = useState(false);
 
   const hasDiscount = discountPercentage && discountPercentage > 0;
@@ -59,9 +62,9 @@ export default function ProductCard({ product }: ProductCardProps) {
                 active={isFavorite}
                 activeClassName="text-red-500 fill-red-500"
                 className="rounded-full bg-white/90 hover:bg-white"
-                onClick={() => setIsFavorite((v) => !v)}
+                onClick={() => toggleFavorite(id)}
               >
-                {isFavorite ? <HeartMinus className="h-4 w-4" /> : <Heart className="h-4 w-4" />}
+                {isFavorite ? <HeartMinus /> : <Heart />}
               </ActionButton>
 
               <ActionButton
@@ -71,7 +74,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 className="rounded-full bg-white/90 hover:bg-white"
                 onClick={() => setIsInCart((v) => !v)}
               >
-                {isInCart ? <Trash2 className="h-4 w-4" /> : <ShoppingBag className="h-4 w-4" />}
+                {isInCart ? <Trash2 /> : <ShoppingBag />}
               </ActionButton>
             </>
           </div>
@@ -104,7 +107,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               className="rounded-full bg-white/90 hover:bg-white"
               onClick={() => setIsInCart((v) => !v)}
             >
-              {isInCart ? <Trash2 className="h-4 w-4" /> : <ShoppingBag className="h-4 w-4" />}
+              {isInCart ? <Trash2 /> : <ShoppingBag />}
             </ActionButton>
           )}
         </div>

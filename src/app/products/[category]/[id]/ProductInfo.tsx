@@ -12,7 +12,7 @@ interface ProductInfoProps {
 }
 
 export default function ProductInfo({ product }: ProductInfoProps) {
-  const { title, description, price, discountPercentage, rating, stock, brand } = product;
+  const { id, title, description, price, discountPercentage, rating, stock, brand } = product;
 
   const hasDiscount = discountPercentage > 0;
   const oldPrice = hasDiscount ? (price / (1 - discountPercentage / 100)).toFixed(2) : null;
@@ -35,7 +35,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         <ProductInfoString title="stock" info={stock.toString()} />
       </div>
 
-      <ProductActions />
+      <ProductActions productId={id} />
 
       <p className="pt-4 text-muted-foreground">{description}</p>
     </div>
