@@ -7,6 +7,7 @@ import { Heart, ShoppingBag } from 'lucide-react';
 import { useFavoritesStore } from '@/lib/stores/favorites.store';
 
 import UserDropdown from './Dropdown';
+import { useCartStore } from '@/lib/stores/cart.store';
 
 const userLinks = [
   { href: '/favorites', icon: Heart, type: 'favorites' },
@@ -15,11 +16,12 @@ const userLinks = [
 
 export default function AuthenticatedActions() {
   const favoritesCount = useFavoritesStore((s) => s.favoriteIds.length);
+  const cartCount = useCartStore((s) => s.items.reduce((sum, item) => sum + item.amount, 0));
 
   return (
     <>
       {userLinks.map(({ href, icon: Icon, type }) => {
-        const count = type === 'favorites' ? favoritesCount : 0;
+        const count = type === 'favorites' ? favoritesCount : cartCount;
 
         return (
           <Link

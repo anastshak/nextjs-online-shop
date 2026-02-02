@@ -36,7 +36,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         <ProductInfoString title="stock" info={stock.toString()} />
       </div>
 
-      <ProductActions productId={id} />
+      <ProductActions productId={id} price={price} />
 
       <p className="pt-4 text-muted-foreground">{description}</p>
     </div>

@@ -1,22 +1,19 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-import { Heart, HeartMinus, ShoppingBag, Trash2 } from 'lucide-react';
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 import { useAuthStore } from '@/lib/stores/auth.store';
-import { useFavoritesStore } from '@/lib/stores/favorites.store';
 
 import type { Product } from '@/types/product';
 
-import ActionButton from './common/ActionButton';
 import RatingStars from './common/RatingStars';
+import FavoriteButton from './FavoriteButton';
+import CartButton from './CartButton';
 
 interface ProductCardProps {
   product: Product;
@@ -26,11 +23,6 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { isAuthenticated } = useAuthStore();
 
   const { id, title, price, thumbnail, rating, discountPercentage, category } = product;
-
-  const isFavorite = useFavoritesStore((s) => s.isFavorite(id));
-  const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite);
-
-  const [isInCart, setIsInCart] = useState(false);
 
   const hasDiscount = discountPercentage && discountPercentage > 0;
   const oldPrice = hasDiscount ? (price / (1 - discountPercentage / 100)).toFixed(2) : null;
@@ -57,25 +49,8 @@ export default function ProductCard({ product }: ProductCardProps) {
         {isAuthenticated && (
           <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black/20">
             <>
-              <ActionButton
-                size="icon"
-                active={isFavorite}
-                activeClassName="text-red-500 fill-red-500"
-                className="rounded-full bg-white/90 hover:bg-white"
-                onClick={() => toggleFavorite(id)}
-              >
-                {isFavorite ? <HeartMinus /> : <Heart />}
-              </ActionButton>
-
-              <ActionButton
-                size="icon"
-                active={isInCart}
-                activeClassName="text-green-600"
-                className="rounded-full bg-white/90 hover:bg-white"
-                onClick={() => setIsInCart((v) => !v)}
-              >
-                {isInCart ? <Trash2 /> : <ShoppingBag />}
-              </ActionButton>
+              <FavoriteButton id={id} mode="basic" />
+              <CartButton id={id} price={price} mode="basic" />
             </>
           </div>
         )}
@@ -99,17 +74,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <RatingStars rating={rating} />
           </div>
 
-          {isAuthenticated && (
-            <ActionButton
-              size="icon"
-              active={isInCart}
-              activeClassName="text-green-600"
-              className="rounded-full bg-white/90 hover:bg-white"
-              onClick={() => setIsInCart((v) => !v)}
-            >
-              {isInCart ? <Trash2 /> : <ShoppingBag />}
-            </ActionButton>
-          )}
+          {isAuthenticated && <CartButton id={id} price={price} mode="basic" />}
         </div>
       </CardContent>
 
