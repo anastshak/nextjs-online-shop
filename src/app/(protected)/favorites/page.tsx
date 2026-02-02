@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { HeartMinus } from 'lucide-react';
 
 import ActionButton from '@/components/common/ActionButton';
+import Title from '@/components/common/Title';
 import ProductsGrid from '@/components/ProductsGrid';
 
 import { getProduct } from '@/lib/api/products';
@@ -63,8 +64,8 @@ export default function FavoritesPage() {
 
   return (
     <>
-      <div className="flex items-center justify-between mb-5">
-        <h1 className="text-xl font-semibold">Favorites</h1>
+      <div className="flex items-center justify-between">
+        <Title text="Favorites" />
 
         <ActionButton onClick={clearFavorites} active activeClassName="text-red-600 border-red-200">
           <HeartMinus /> Unfavorite all

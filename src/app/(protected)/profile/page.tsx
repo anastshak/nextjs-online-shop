@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 
+import Title from '@/components/common/Title';
 import InfoItem from '@/components/common/ProfileInfoItem';
 
 import { useAuthStore } from '@/lib/stores/auth.store';
@@ -35,10 +36,8 @@ export default function ProfilePage() {
         </div>
 
         <div className="ml-6">
-          <h1 className="text-2xl font-semibold">
-            {firstName} {lastName}
-          </h1>
-          <p className="text-sm text-muted-foreground">{email}</p>
+          <Title text={`${firstName} ${lastName}`} />
+          <p className="text-sm text-muted-foreground -mt-6">{email}</p>
         </div>
       </div>
 

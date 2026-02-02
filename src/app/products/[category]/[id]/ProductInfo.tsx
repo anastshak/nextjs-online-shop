@@ -2,6 +2,7 @@ import type { Product } from '@/types/product';
 
 import { Badge } from '@/components/ui/badge';
 
+import Title from '@/components/common/Title';
 import ProductInfoString from '@/components/common/ProductInfoString';
 import RatingStars from '@/components/common/RatingStars';
 
@@ -19,7 +20,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-semibold">{title}</h1>
+      <Title text={title} />
 
       <RatingStars rating={rating} />
 
