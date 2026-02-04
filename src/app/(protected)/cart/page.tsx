@@ -1,11 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { Trash2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 import ActionButton from '@/components/common/ActionButton';
 import Title from '@/components/common/Title';
+import OrderButton from '@/components/OrderButton';
 
 import { getProduct } from '@/lib/api/products';
 import { useCartStore } from '@/lib/stores/cart.store';
@@ -13,6 +16,8 @@ import { useCartStore } from '@/lib/stores/cart.store';
 import type { Product } from '@/types/product';
 
 export default function CartPage() {
+  const router = useRouter();
+
   const items = useCartStore((s) => s.items);
   const increase = useCartStore((s) => s.increaseAmount);
   const decrease = useCartStore((s) => s.decreaseAmount);
@@ -22,28 +27,53 @@ export default function CartPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    let active = true;
+  const productIdsKey = useMemo(
+    () =>
+      items
+        .map((i) => i.productId)
+        .sort()
+        .join(','),
+    [items]
+  );
 
-    (async () => {
-      if (items.length === 0) {
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadCartItems() {
+      if (!productIdsKey) {
         setProducts([]);
-        setLoading(false);
         return;
       }
 
-      const data = await Promise.all(items.map((i) => getProduct(String(i.productId))));
+      setLoading(true);
 
-      if (active) {
-        setProducts(data);
-        setLoading(false);
+      try {
+        const ids = productIdsKey.split(',');
+
+        const data = await Promise.all(ids.map((id) => getProduct(id)));
+
+        if (!cancelled) {
+          setProducts(data);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
-    })();
+    }
+
+    loadCartItems();
 
     return () => {
-      active = false;
+      cancelled = true;
     };
-  }, [items]);
+  }, [productIdsKey]);
+
+  const handleOrderSuccess = () => {
+    clearCart();
+    toast.success('Order placed successfully', { position: 'top-center' });
+    router.push('/');
+  };
 
   if (loading) {
     return <div className="py-10 text-center">Loading cart...</div>;
@@ -66,7 +96,7 @@ export default function CartPage() {
       <div className="space-y-4 p-10">
         {products.map((product) => {
           const item = items.find((i) => i.productId === product.id)!;
-
+          if (!item) return null;
           return (
             <div
               key={product.id}
@@ -96,8 +126,10 @@ export default function CartPage() {
         })}
       </div>
 
-      <div className="flex justify-end text-lg font-semibold mt-5 mr-20">
-        Total: ${totalPrice.toFixed(2)}
+      <div className="flex justify-between items-center mt-6 px-10">
+        <div className="text-lg font-semibold">Total: ${totalPrice.toFixed(2)}</div>
+
+        <OrderButton onOrderSuccess={handleOrderSuccess} />
       </div>
     </>
   );
