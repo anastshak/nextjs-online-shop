@@ -17,6 +17,7 @@ A modern e-commerce demo application built with Next.js, React, and TypeScript. 
 - zustand
 - react hook form, zod
 - eslint, prettier, husky
+- dummyjson api
 
 ## How to run the app
 
