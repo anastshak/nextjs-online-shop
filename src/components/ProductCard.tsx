@@ -10,6 +10,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
+import { useAuthStore } from '@/lib/stores/auth.store';
+
 import type { Product } from '@/types/product';
 
 import ActionButton from './common/ActionButton';
@@ -17,10 +19,11 @@ import RatingStars from './common/RatingStars';
 
 interface ProductCardProps {
   product: Product;
-  showActions?: boolean;
 }
 
-export default function ProductCard({ product, showActions = true }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
+  const { isAuthenticated } = useAuthStore();
+
   const { id, title, price, thumbnail, rating, discountPercentage, category } = product;
 
   const [isFavorite, setIsFavorite] = useState(false);
@@ -48,8 +51,8 @@ export default function ProductCard({ product, showActions = true }: ProductCard
           className="object-cover transition-transform duration-500 group-hover:scale-110"
         />
 
-        <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black/20">
-          {showActions && (
+        {isAuthenticated && (
+          <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-black/20">
             <>
               <ActionButton
                 size="icon"
@@ -71,8 +74,8 @@ export default function ProductCard({ product, showActions = true }: ProductCard
                 {isInCart ? <Trash2 className="h-4 w-4" /> : <ShoppingBag className="h-4 w-4" />}
               </ActionButton>
             </>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       <CardHeader className="p-4 pb-2">
@@ -93,15 +96,17 @@ export default function ProductCard({ product, showActions = true }: ProductCard
             <RatingStars rating={rating} />
           </div>
 
-          <ActionButton
-            size="icon"
-            active={isInCart}
-            activeClassName="text-green-600"
-            className="rounded-full bg-white/90 hover:bg-white"
-            onClick={() => setIsInCart((v) => !v)}
-          >
-            {isInCart ? <Trash2 className="h-4 w-4" /> : <ShoppingBag className="h-4 w-4" />}
-          </ActionButton>
+          {isAuthenticated && (
+            <ActionButton
+              size="icon"
+              active={isInCart}
+              activeClassName="text-green-600"
+              className="rounded-full bg-white/90 hover:bg-white"
+              onClick={() => setIsInCart((v) => !v)}
+            >
+              {isInCart ? <Trash2 className="h-4 w-4" /> : <ShoppingBag className="h-4 w-4" />}
+            </ActionButton>
+          )}
         </div>
       </CardContent>
 

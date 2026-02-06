@@ -1,6 +1,7 @@
 import type { Product } from '@/types/product';
 
 import { Badge } from '@/components/ui/badge';
+
 import ProductInfoString from '@/components/common/ProductInfoString';
 import RatingStars from '@/components/common/RatingStars';
 
